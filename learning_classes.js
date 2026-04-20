@@ -1,4 +1,3 @@
-
 let string = "komputronik ";
 
 
@@ -68,7 +67,7 @@ set minimumRAM(value) {
 
 
     parametrykomputera( ) {  
-         console.log(`Nazwa: ${this.nazwa}`);
+         console.log(` Nazwa: ${this.nazwa}`);
          console.log(`RAM: ${this.ram}`);
          console.log(`Dysk: ${this.dysk}`);
          console.log(`Procesor: ${this.procesor}`);
@@ -115,7 +114,8 @@ get nazwa() {
 class Laptop extends Komputer {
     constructor(nazwa, ram, dysk, procesor, kartaGraficzna, obudowa, monitor, klawiatura, mysz, plytaGlowna, zasilacz, chlodzenie, bateria) {
         super(nazwa, ram, dysk, procesor, kartaGraficzna, obudowa, monitor, klawiatura, mysz, plytaGlowna, zasilacz, chlodzenie);
-        this.bateria = bateria; 
+        this.bateria = bateria;
+        this.klawiaturanumeryczna = true; 
     }}
 
 
@@ -130,18 +130,110 @@ class Laptop extends Komputer {
 //     }   }
 
 
-let komputer1 = new Komputer("komputer1", 0, "1000", "procesorI3", "karta graficzna_gtx4090");
+let komputer1 = new Komputer("komputer 1", 0, "1000", "procesorI3", "karta graficzna_gtx4090");
 // komputer1.parametrykomputera();
 // komputer1.notmissingHW();
 // komputer1.minimumRAM = "ram32";
 console.log(komputer1.jakiemaCPU);
-let komputer2 = new Komputer("komputer2", "ram32", "dysk2tb", "procesorI5", "karta graficzna_gtx4400");
+let komputer2 = new Komputer("komputer 2", "ram32", "dysk2tb", "procesorI5", "karta graficzna_gtx4400");
 console.log(komputer2.jakiemaCPU);
 // komputer2.parametrykomputera();
-let komputer3 = new Komputer("komputer3", "ram64", "dysk4tb", "procesorI7", "karta graficzna_gtx4800");
+let komputer3 = new Komputer("komputer 3", "ram64", "dysk4tb", "procesorI7", "karta graficzna_gtx4800");
 //  porownanieKomputerow(komputer1, komputer2);
 //  porownanieKomputerow(komputer2, komputer3);   
  komputer1.ktorylepszy(komputer1, komputer3);
-console.log(komputer1.opiszdysk);
+// console.log(komputer1.opiszdysk);
 // console.log(komputer1.minimumRAM);
-console.log(komputer1.nazwa);
+// console.log(komputer1.nazwa);
+let laptop1 = new Laptop("laptop 1", "ram64", "dysk4tb", "procesorI7", "karta graficzna_gtx4800", "obudowa1", "monitor1", "klawiatura1", "mysz1", "plytaGlowna1", "zasilacz1", "chlodzenie1", "bateria5000mAh");
+console.table(laptop1);   
+
+function porowanie(jednostkaA, jednostkaB) {
+    if (jednostkaA.procesor > jednostkaB.procesor) {
+        console.log(`${jednostkaA.nazwa} ma lepszy procesor niż ${jednostkaB.nazwa}`);
+    } else if (jednostkaA.procesor < jednostkaB.procesor) {
+        console.log(`${jednostkaB.nazwa} ma lepszy procesor niż ${jednostkaA.nazwa}`);
+    } else {
+        console.log(`${jednostkaA.nazwa} i ${jednostkaB.nazwa} mają taki sam procesor`);
+    }}
+porowanie(komputer1, laptop1)  ;  
+
+const porowanieHW = (jednostkaA, jednostkaB) => {
+    if (jednostkaA.procesor > jednostkaB.procesor) {
+        return `${jednostkaA.nazwa} ma lepszy procesor niż ${jednostkaB.nazwa}`;
+    } else if (jednostkaA.procesor < jednostkaB.procesor) {
+        return `${jednostkaB.nazwa} ma lepszy procesor niż ${jednostkaA.nazwa}`;
+    } else {
+        return `${jednostkaA.nazwa} i ${jednostkaB.nazwa} mają taki sam procesor`;
+    }
+};
+console.log(porowanieHW(komputer1, laptop1) + " (wynik porównania HW)");
+
+
+class zakupy {
+    constructor(IDpracownika, nazwaProduktu, cena, ilosc, kodPromocyjny) {
+        this.IDpracownika = IDpracownika;
+        this.nazwaProduktu = nazwaProduktu;
+        this.cena = cena;
+        this.ilosc = ilosc,
+        this.kodPromocyjny = kodPromocyjny;
+
+    }
+get wartoscZakupu() {
+    return this.cena * this.ilosc;
+}
+get cena() {
+    return this._cena;
+}
+get ilosc() {
+    return this._ilosc;
+}
+set kodPromocyjny(value) {
+    this._kodPromocyjny = value;  // Zapisz kod
+    if (value === "PROMO10") {
+        this.cena = this.cena * 0.9; // Zniżka 10%
+    } else if (value === "PROMO20") {
+        this.cena = this.cena * 0.8; // Zniżka 20%
+    } else {
+        console.log("Nieprawidłowy kod promocyjny.");
+    }   
+}
+get kodPromocyjny() {
+    return this._kodPromocyjny;
+}
+set ilosc(value) {
+    if (value > 0) {
+        this._ilosc = value;
+    } else {
+        console.log("Ilość musi być większa niż 0.");
+    }   
+}
+
+set cena(value) {
+    if (value > 0) {
+        this._cena = value;
+    } else {
+        console.log("Cena musi być większa niż 0.");
+    }
+}
+set nazwaProduktu(value) {  
+    if (value.length > 0) {
+        this._nazwaProduktu = value;
+    } else {
+        console.log("Nazwa produktu nie może być pusta.");
+    }
+
+}
+set IDpracownika(value) {
+    if (value > 0) {
+        this._IDpracownika = value;
+    } else {
+        console.log("ID pracownika musi być większe niż 0.");
+    }   
+}
+}
+
+let zakup1 = new zakupy(123, "Laptop", 5000, 2, "PROMO10");
+console.log(`Wartość zakupu: ${zakup1.wartoscZakupu} zl po zastosowaniu kodu promocyjnego ${zakup1.kodPromocyjny}.`);
+
+console.log(zakup1._kodPromocyjny);

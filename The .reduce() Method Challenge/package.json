@@ -1,0 +1,17 @@
+{
+  "name": "Scrim-s06i3hu",
+  "description": "https://scrimba.com/advanced-javascript-c03kpi3kss/~0yux/s0nvo4i1d3/head",
+  "scripts": {
+    "watch": "webpack -w",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "webpack": "^2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0",
+    "babel-loader": "^7.0",
+    "babel-preset-env": "*",
+    "babel-preset-react": "*"
+  }
+}
