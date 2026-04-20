@@ -237,3 +237,4 @@ let zakup1 = new zakupy(123, "Laptop", 5000, 2, "PROMO10");
 console.log(`Wartość zakupu: ${zakup1.wartoscZakupu} zl po zastosowaniu kodu promocyjnego ${zakup1.kodPromocyjny}.`);
 
 console.log(zakup1._kodPromocyjny);
+console.log(zakup1._cena);
