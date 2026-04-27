@@ -238,3 +238,5 @@ console.log(`Wartość zakupu: ${zakup1.wartoscZakupu} zl po zastosowaniu kodu p
 
 console.log(zakup1._kodPromocyjny);
 console.log(zakup1._cena);
+
+// potestowac import { studentsArr } from '/studentsArr'
